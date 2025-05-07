@@ -1,7 +1,7 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 
@@ -114,6 +114,71 @@ header {
   min-height: 200px;
 }
 
+.hero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./assets/ing-sistemas.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 4rem 2rem;
+  margin-bottom: 4rem;
+  position: relative;
+  backdrop-filter: blur(2px);
+}
+
+.hero-content {
+  max-width: 800px;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.hero-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-color: #90C074;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #7aa55f;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-content h2 {
+    font-size: 2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
 .info-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -122,9 +187,24 @@ header {
   max-width: 1400px;
   margin: 0 auto;
   background-color: #f8f9fa;
+  position: relative; /* Add position relative */
+}
+
+/* Add a subtle separator */
+.info-section::before {
+  content: '';
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background-color: #90C074;
+  opacity: 0.5;
 }
 
 .info-card {
+  text-align: justify;
   background-color: #FFFFFF;
   padding: 2.5rem;
   border-radius: 12px;
@@ -204,8 +284,8 @@ header {
 }
 
 .logo-img {
-  height: 200px;
-  width: auto;
+  /* height: 200px; */
+  width: 280px;
   object-fit: contain;
 }
 
@@ -363,7 +443,7 @@ header {
 }
 
 .footer-section a:hover {
-  color: #90C074;
+  color: #d4dad1;
 }
 
 .social-icons {
@@ -400,7 +480,7 @@ header {
 }
 
 .social-icons a:hover {
-  background-color: #90C074;
+  background-color: #e4e4e4;
   transform: translateY(-3px);
 }
 
@@ -426,5 +506,72 @@ header {
 
   .social-icons {
     justify-content: center;
+  }
+}
+
+.nav-menu {
+  background-color: #90C074;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-menu ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-menu li {
+  color: white;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-menu li.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-menu li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-menu li:hover::after,
+.nav-menu li.active::after {
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .nav-menu li {
+    width: 100%;
+    text-align: center;
   }
 }

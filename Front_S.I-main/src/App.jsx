@@ -8,7 +8,7 @@ import twitterIcon from './assets/x.png'
 import instagramIcon from './assets/instagram.png'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState('dashboard')
 
   return (
     <div className="landing-container">
@@ -17,25 +17,34 @@ function App() {
         <div className="top-bar">
           <div className="logo-container">
             <img src={logoUniCesar} alt="Logo Universidad Popular del Cesar" className="logo-img" />
-            <h1>Ingeniería de Sistemas</h1>
+            {/* <h1>Ingeniería de Sistemas</h1> */}
           </div>
         </div>
         <nav className="nav-menu">
           <ul>
-            <li onClick={() => setActiveSection('home')} className={activeSection === 'home' ? 'active' : ''}>
-              Inicio
+            <li onClick={() => setActiveSection('dashboard')} className={activeSection === 'dashboard' ? 'active' : ''}>
+              Dashboard
             </li>
-            <li onClick={() => setActiveSection('about')} className={activeSection === 'about' ? 'active' : ''}>
-              Programa
+            <li onClick={() => setActiveSection('graduates')} className={activeSection === 'graduates' ? 'active' : ''}>
+              Egresados
             </li>
-            <li onClick={() => setActiveSection('academic')} className={activeSection === 'academic' ? 'active' : ''}>
-              Académico
+            <li onClick={() => setActiveSection('companies')} className={activeSection === 'companies' ? 'active' : ''}>
+              Empresas
             </li>
-            <li onClick={() => setActiveSection('research')} className={activeSection === 'research' ? 'active' : ''}>
-              Investigación
+            <li onClick={() => setActiveSection('projects')} className={activeSection === 'projects' ? 'active' : ''}>
+              Proyectos
             </li>
-            <li onClick={() => setActiveSection('contact')} className={activeSection === 'contact' ? 'active' : ''}>
-              Contacto
+            <li onClick={() => setActiveSection('events')} className={activeSection === 'events' ? 'active' : ''}>
+              Eventos
+            </li>
+            <li onClick={() => setActiveSection('international')} className={activeSection === 'international' ? 'active' : ''}>
+              Internacionalización
+            </li>
+            <li onClick={() => setActiveSection('social')} className={activeSection === 'social' ? 'active' : ''}>
+              Proyecto Social
+            </li>
+            <li onClick={() => setActiveSection('publications')} className={activeSection === 'publications' ? 'active' : ''}>
+              Publicaciones
             </li>
           </ul>
         </nav>
@@ -45,7 +54,7 @@ function App() {
       <section className="hero-section">
         <div className="hero-content">
           <h2>Programa de Ingeniería de Sistemas</h2>
-          <p>Formando profesionales innovadores en tecnología y sistemas de información</p>
+          <p>El Ingeniero de Sistemas egresado de la Universidad Popular del Cesar será un profesional integral que estará en la capacidad de desarrollar soluciones de software aplicando las ciencias básicas y de ingeniería, modelos basados en métodos analíticos, computacionales y experimentales para la resolución de problemas, con capacidad de gestión, emprendimiento y pensamiento crítico.</p>
           <button className="cta-button">Conoce más</button>
         </div>
       </section>
