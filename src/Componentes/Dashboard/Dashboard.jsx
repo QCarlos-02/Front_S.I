@@ -1,0 +1,388 @@
+// Dashboard.jsx
+import { useState } from "react";
+import StatsCard from "./StatsCard";
+import BarChart from "./BarChart";
+import PieChart from "./PieChart";
+import LineChart from "./LineChart";
+import DataTable from "./DataTable";
+import { downloadCSV, downloadExcel, downloadPDF } from "./exportUtils";
+
+// Importar el CSS como último paso para evitar conflictos
+import "./Dashboard.css";
+
+const Dashboard = () => {
+  const [activeTab, setActiveTab] = useState("general");
+
+  // Datos extraídos del CSV
+  const stats = {
+    current_students: 737,
+    total_graduates: 1134,
+    employment_rate: 92,
+    graduation_rate: 89,
+    total_agreements: 32,
+    specialized_laboratories: 6,
+    total_professors: 47,
+    phd_professors: 5,
+    masters_professors: 26,
+    specialization_professors: 16,
+  };
+
+  // Datos para gráficos
+  const professorData = [
+    { name: "Docentes con Doctorado", value: 5 },
+    { name: "Docentes con Maestría", value: 26 },
+    { name: "Docentes con Especialización", value: 16 },
+  ];
+
+  const productionData = [
+    { name: "Ponencias Nacionales", value: 31 },
+    { name: "Ponencias Internacionales", value: 32 },
+    { name: "Artículos Científicos", value: 11 },
+    { name: "Producción Técnica", value: 52 },
+    { name: "Capítulos de Libros", value: 10 },
+  ];
+
+  const graduatesPerYearData = [
+    { year: "2017", value: 60 },
+    { year: "2018", value: 65 },
+    { year: "2019", value: 67 },
+    { year: "2020", value: 63 },
+    { year: "2021", value: 70 },
+  ];
+
+  const employmentData = [
+    { name: "Empleados", value: 92 },
+    { name: "Desempleados", value: 8 },
+  ];
+
+  const handleExportData = (format) => {
+    const data = {
+      stats,
+      professorData,
+      productionData,
+      graduatesPerYearData,
+    };
+
+    switch (format) {
+      case "csv":
+        downloadCSV(data, "estadisticas-ingenieria-sistemas");
+        break;
+      case "excel":
+        downloadExcel(data, "estadisticas-ingenieria-sistemas");
+        break;
+      case "pdf":
+        downloadPDF(data, "estadisticas-ingenieria-sistemas");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "general":
+        return (
+          <div className="tab-content">
+            <div className="stats-cards">
+              <StatsCard
+                title="Estudiantes Actuales"
+                value={stats.current_students}
+                icon="users"
+              />
+              <StatsCard
+                title="Total Egresados"
+                value={stats.total_graduates}
+                icon="graduation-cap"
+              />
+              <StatsCard
+                title="Tasa de Empleabilidad"
+                value={`${stats.employment_rate}%`}
+                icon="briefcase"
+              />
+              <StatsCard
+                title="Tasa de Graduación"
+                value={`${stats.graduation_rate}%`}
+                icon="chart-line"
+              />
+            </div>
+
+            <div className="charts-row">
+              <div className="chart-container">
+                <h3>Estadísticas de Empleabilidad</h3>
+                <PieChart data={employmentData} />
+              </div>
+              <div className="chart-container">
+                <h3>Evolución de Egresados</h3>
+                <LineChart data={graduatesPerYearData} />
+              </div>
+            </div>
+
+            <div className="data-section">
+              <h3>Convenios y Alianzas Académicas</h3>
+              <p>Total de convenios y alianzas: {stats.total_agreements}</p>
+              <DataTable
+                headers={[
+                  "Tipo de Convenio",
+                  "Institución",
+                  "Fecha de Inicio",
+                  "Estado",
+                ]}
+                data={[
+                  ["Académico", "Oracle Academy", "2020-01-15", "Activo"],
+                  ["Investigación", "Colciencias", "2021-05-10", "Activo"],
+                  [
+                    "Networking",
+                    "Cisco Networking Academy",
+                    "2019-08-22",
+                    "Activo",
+                  ],
+                  [
+                    "Internacional",
+                    "Universidad Politécnica de Madrid",
+                    "2022-01-15",
+                    "Activo",
+                  ],
+                  ["Académico", "Microsoft", "2020-11-30", "Activo"],
+                ]}
+              />
+            </div>
+          </div>
+        );
+
+      case "graduates":
+        return (
+          <div className="tab-content">
+            <div className="stats-cards">
+              <StatsCard
+                title="Total Egresados"
+                value={stats.total_graduates}
+                icon="graduation-cap"
+              />
+              <StatsCard
+                title="Tasa de Empleabilidad"
+                value={`${stats.employment_rate}%`}
+                icon="briefcase"
+              />
+              <StatsCard
+                title="Promedio Anual de Egresados"
+                value="63"
+                icon="users"
+              />
+              <StatsCard
+                title="Relación Estudiante/Egresado"
+                value="0.65"
+                icon="balance-scale"
+              />
+            </div>
+
+            <div className="charts-row">
+              <div className="chart-container">
+                <h3>Empleabilidad de Egresados</h3>
+                <PieChart data={employmentData} />
+              </div>
+              <div className="chart-container">
+                <h3>Egresados por Año</h3>
+                <BarChart
+                  data={graduatesPerYearData}
+                  dataKey="value"
+                  nameKey="year"
+                />
+              </div>
+            </div>
+
+            <div className="data-section">
+              <h3>Estadísticas de Inserción Laboral</h3>
+              <DataTable
+                headers={["Sector", "Porcentaje", "Salario Promedio"]}
+                data={[
+                  ["Tecnología", "45%", "3.2 SMMLV"],
+                  ["Educación", "25%", "2.8 SMMLV"],
+                  ["Servicios", "15%", "2.6 SMMLV"],
+                  ["Gobierno", "10%", "3.0 SMMLV"],
+                  ["Otros", "5%", "2.5 SMMLV"],
+                ]}
+              />
+            </div>
+          </div>
+        );
+
+      case "professors":
+        return (
+          <div className="tab-content">
+            <div className="stats-cards">
+              <StatsCard
+                title="Total Docentes"
+                value={stats.total_professors}
+                icon="chalkboard-teacher"
+              />
+              <StatsCard
+                title="Docentes con Doctorado"
+                value={stats.phd_professors}
+                icon="user-graduate"
+              />
+              <StatsCard
+                title="Docentes con Maestría"
+                value={stats.masters_professors}
+                icon="user-tie"
+              />
+              <StatsCard
+                title="Docentes con Especialización"
+                value={stats.specialization_professors}
+                icon="user"
+              />
+            </div>
+
+            <div className="charts-row">
+              <div className="chart-container">
+                <h3>Nivel Académico de Docentes</h3>
+                <PieChart data={professorData} />
+              </div>
+              <div className="chart-container">
+                <h3>Distribución por Tipo de Vinculación</h3>
+                <BarChart
+                  data={[
+                    { name: "Planta", value: 5 },
+                    { name: "Tiempo Completo", value: 22 },
+                    { name: "Catedráticos", value: 18 },
+                    { name: "Ad Honorem", value: 2 },
+                  ]}
+                  dataKey="value"
+                  nameKey="name"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "production":
+        return (
+          <div className="tab-content">
+            <div className="stats-cards">
+              <StatsCard
+                title="Ponencias Nacionales"
+                value={31}
+                icon="map-marker-alt"
+              />
+              <StatsCard
+                title="Ponencias Internacionales"
+                value={32}
+                icon="globe"
+              />
+              <StatsCard
+                title="Artículos Científicos"
+                value={11}
+                icon="file-alt"
+              />
+              <StatsCard title="Producción Técnica" value={52} icon="cogs" />
+            </div>
+
+            <div className="charts-row">
+              <div className="chart-container">
+                <h3>Producción Académica</h3>
+                <BarChart
+                  data={productionData}
+                  dataKey="value"
+                  nameKey="name"
+                />
+              </div>
+              <div className="chart-container">
+                <h3>Distribución Porcentual</h3>
+                <PieChart data={productionData} />
+              </div>
+            </div>
+
+            <div className="data-section">
+              <h3>Capítulos de Libros Publicados</h3>
+              <p>Total: {10}</p>
+              <DataTable
+                headers={["Título", "Autores", "Año", "Editorial"]}
+                data={[
+                  [
+                    "Inteligencia Artificial en la Educación",
+                    "Pérez, J., Gómez, L.",
+                    "2023",
+                    "Editorial Académica",
+                  ],
+                  [
+                    "Desarrollo Web Moderno",
+                    "Martínez, A., Rodríguez, C.",
+                    "2022",
+                    "Springer",
+                  ],
+                  [
+                    "Machine Learning Aplicado",
+                    "López, S., Torres, M.",
+                    "2021",
+                    "IEEE Press",
+                  ],
+                ]}
+              />
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="dashboard-main-container">
+      <div className="dashboard-header">
+        <h1>Dashboard Analítico</h1>
+        <p>
+          Programa de Ingeniería de Sistemas - Universidad Popular del Cesar
+        </p>
+
+        <div className="export-buttons">
+          <button onClick={() => handleExportData("csv")}>Exportar CSV</button>
+          <button onClick={() => handleExportData("excel")}>
+            Exportar Excel
+          </button>
+          <button onClick={() => handleExportData("pdf")}>Exportar PDF</button>
+        </div>
+      </div>
+
+      <div className="dashboard-content-wrapper">
+        <div className="tab-nav-horizontal">
+          <button
+            className={
+              activeTab === "general" ? "tab-button active" : "tab-button"
+            }
+            onClick={() => setActiveTab("general")}
+          >
+            General
+          </button>
+          <button
+            className={
+              activeTab === "graduates" ? "tab-button active" : "tab-button"
+            }
+            onClick={() => setActiveTab("graduates")}
+          >
+            Egresados
+          </button>
+          <button
+            className={
+              activeTab === "professors" ? "tab-button active" : "tab-button"
+            }
+            onClick={() => setActiveTab("professors")}
+          >
+            Docentes
+          </button>
+          <button
+            className={
+              activeTab === "production" ? "tab-button active" : "tab-button"
+            }
+            onClick={() => setActiveTab("production")}
+          >
+            Producción Académica
+          </button>
+        </div>
+
+        <div className="tab-content-container">{renderTabContent()}</div>
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
