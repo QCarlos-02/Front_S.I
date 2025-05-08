@@ -92,7 +92,7 @@ const ImpactoSocial = () => {
                 <th>Inicio</th>
                 <th>Fin</th>
                 <th>Estado</th>
-                <th>Acciones</th>
+                <th>Detalles</th>
               </tr>
             </thead>
             <tbody>
@@ -121,7 +121,7 @@ const ImpactoSocial = () => {
                       className="contact-button-table email"
                       onClick={() => handleVerMasClick(proyecto)}
                     >
-                      Ver más
+                      Ver
                     </button>
                   </td>
                 </tr>
