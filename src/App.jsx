@@ -9,6 +9,8 @@ import instagramIcon from "./assets/instagram.png";
 
 // Importar tu componente Dashboard existente
 import Dashboard from "./Componentes/Dashboard/Dashboard";
+import Empresas from './Comp_Carlos/Empresas';
+
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
@@ -148,6 +150,8 @@ function App() {
 
       {/* Mostrar tu Dashboard existente cuando activeSection es "dashboard" */}
       {activeSection === "dashboard" && <Dashboard />}
+      {activeSection === "companies" && <Empresas cambiarSeccion={setActiveSection} />}
+
 
       {/* Footer */}
       <footer className="main-footer">
