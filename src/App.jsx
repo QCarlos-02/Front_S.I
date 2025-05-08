@@ -80,12 +80,6 @@ function App() {
             </li>
 
             <li
-              onClick={() => setActiveSection("projects")}
-              className={activeSection === "projects" ? "active" : ""}
-            >
-              Proyectos
-            </li>
-            <li
               onClick={() => setActiveSection("events")}
               className={activeSection === "events" ? "active" : ""}
             >
@@ -105,17 +99,21 @@ function App() {
       {/* CONTENIDO DINÁMICO */}
       {activeSection === "inicio" && (
         <>
-          <section className="hero-section">{/* ...tu código...*/}
+        <section className="hero-section">{/* ...tu código...*/}
           <div className="hero-content">
               <h2>Programa de Ingeniería de Sistemas</h2>
               <p>
                 El Ingeniero de Sistemas egresado de la Universidad Popular del Cesar será un profesional integral que estará en la capacidad de desarrollar soluciones de software aplicando las ciencias básicas y de ingeniería, modelos basados en métodos analíticos, computacionales y experimentales para la resolución de problemas, con capacidad de gestión, emprendimiento y pensamiento crítico.
               </p>
-              <button className="cta-button">Conoce más</button>
-            </div>
-
-          </section>
-          <section className="info-section">{/* ...tus cards...*/}
+              <button 
+                className="cta-button" 
+                onClick={() => window.open('https://www.unicesar.edu.co/facultades_pregrado/pregrados-ingenierias/ing-sistemas/', '_blank')}
+              >
+                Conoce más
+              </button>
+          </div>
+        </section>
+        <section className="info-section">{/* ...tus cards...*/}
           <div className="info-card mission">
               <h3>Misión</h3>
               <p>Formar profesionales en Ingeniería de Sistemas con capacidad de gestionar, desarrollar y administrar proyectos de base tecnológica, comprometidos con el desarrollo sostenible de la región Caribe y el país, fundamentados en principios y valores que contribuyan a la construcción de una sociedad más justa y equitativa.</p>
@@ -137,7 +135,7 @@ function App() {
               </ul>
             </div>
 
-          </section>
+        </section>
         </>
       )}
       {activeSection === "dashboard"        && <Dashboard />}
