@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import DataTable from 'react-data-table-component';
-import '../App.css'; // Asegúrate de tener este archivo CSS para los estilos
+import './Empresas.css'; // Asegúrate de tener este archivo CSS para los estilos
 const Empresas = () => {
   const [empresas, setEmpresas] = useState([]);
   const [filtro, setFiltro] = useState('');
@@ -65,30 +65,9 @@ const Empresas = () => {
           className="border border-gray-300 rounded text-sm w-full sm:w-96 h-10 px-3"
         />
 
-        <button
-          onClick={() => setMostrarBeneficios(!mostrarBeneficios)}
-          className="bg-green-700 text-white text-xs font-semibold rounded hover:bg-green-800 transition-all px-4 py-2 mt-2 sm:mt-0"
-          style={{ marginLeft: "2rem", whiteSpace: "nowrap" }}
-        >
-          {mostrarBeneficios ? 'Ocultar beneficios' : 'Ver beneficios'}
-        </button>
       </div>
 
-      {/* Card de Beneficios */}
-      {mostrarBeneficios && (
-  <div className="card-beneficios-container">
-    <div className="card-beneficios">
-      <h2>Beneficios de colaborar con el programa</h2>
-      <ul>
-        <li>Acceso a estudiantes capacitados en tecnologías actuales.</li>
-        <li>Participación en proyectos de investigación aplicada.</li>
-        <li>Asesoría técnica gratuita en el desarrollo de soluciones.</li>
-        <li>Reconocimiento en medios institucionales de la universidad.</li>
-        <li>Alianzas a largo plazo para prácticas y empleabilidad.</li>
-      </ul>
-    </div>
-  </div>
-)}
+      
 
 
       {/* Tabla */}

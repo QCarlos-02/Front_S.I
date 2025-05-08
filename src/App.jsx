@@ -6,6 +6,7 @@ import instagramIcon from "./assets/instagram.png";
 import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
 import Dashboard from "./Componentes/Dashboard/Dashboard";
+import Egresados from "./Componentes/Egresados/Egresados";
 import GaleriaMultimedia from "./Componentes/Eventos/GaleriaMultimedia";
 import Empresas from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
@@ -189,6 +190,8 @@ function App() {
         </>
       )}
       {activeSection === "dashboard" && <Dashboard />}
+      {activeSection === "graduates" && <Egresados />}
+
       {activeSection === "empresas_aliadas" && (
         <Empresas cambiarSeccion={setActiveSection} />
       )}

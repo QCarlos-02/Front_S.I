@@ -5,6 +5,34 @@
   text-align: center;
 }
 
+
+/* Asegura que la cabecera esté encima del hero */
+.main-header {
+  position: relative;
+  z-index: 300;
+}
+
+/* También puedes hacerlo sobre el nav directamente */
+.nav-menu {
+  position: relative;
+  z-index: 300;
+}
+
+/* El sub-menú ya tenía un z-index, pero asegurémoslo */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 400;    /* más alto que el header */
+  display: block !important;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -510,12 +538,48 @@ header {
 }
 
 .nav-menu {
-  background-color: #90C074;
-  padding: 1rem 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-menu li {
+  color: #666;
+  transition: all 0.3s ease;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid transparent; /* Add transparent border initially */
+}
+
+.nav-menu li:hover {
+  color: #2E7D32;
+  border: none; /* Remove all borders */
+  border-bottom: 1px solid #2E7D32; /* Add only bottom border */
+}
+
+/* For the active state */
+.nav-menu li.active {
+  color: #2E7D32;
+  border: none; /* Remove all borders */
+  border-bottom: 1px solid #2E7D32; /* Add only bottom border */
+}
+
+/* Specific styles for the dropdown trigger */
+.nav-menu .dropdown .nav-item {
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.nav-menu .dropdown:hover .nav-item {
+  color: #2E7D32;
+}
+
+.nav-menu > ul {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -527,7 +591,7 @@ header {
 }
 
 .nav-menu li {
-  color: white;
+  color: rgb(163, 163, 163);
   padding: 0.8rem 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -574,4 +638,92 @@ header {
     width: 100%;
     text-align: center;
   }
+}
+
+.submenu {
+  /* Elimina cualquier flex heredado y fuerza columna */
+  display: block !important;
+  position: absolute;      /* para que flote sobre el contenido */
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 200;
+}
+
+.submenu li {
+  list-style: none;
+  display: block !important; /* ocupa toda la anchura */
+  padding: 10px 16px;
+  color: #0B7F46;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.submenu li + li {
+  margin-top: 4px; /* opcional: separa cada ítem */
+}
+
+.submenu li:hover {
+  background-color: #f0f0f0;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100001; /* Higher than header and nav */
+}
+
+.dropdown {
+  position: relative;
+}
+
+/* Add these styles at the top level */
+.landing-container {
+  position: relative;
+}
+
+.main-header {
+  position: relative;
+  z-index: 100000; /* Very high z-index */
+  background: white;
+}
+
+.nav-menu {
+  position: relative;
+  z-index: 100000;
+}
+
+.dropdown {
+  position: relative;
+  z-index: 100000;
+}
+
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 100001; /* Higher than header and nav */
+}
+
+/* Ensure hero section stays below */
+.hero-section {
+  position: relative;
+  z-index: 1;
 }
