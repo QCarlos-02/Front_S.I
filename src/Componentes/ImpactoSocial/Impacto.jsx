@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
-import "./Impacto.css"; // reutilizamos el estilo existente
+import "./Impacto.css"; 
 
 const ImpactoSocial = () => {
   const [proyectos, setProyectos] = useState([]);

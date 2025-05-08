@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import Papa from "papaparse";
+import axios from "axios";
 import "./internacionalizacion.css"; // reutilizamos el estilo existente
 
 const Internacionalizacion = () => {
@@ -9,8 +10,10 @@ const Internacionalizacion = () => {
   const [filterType, setFilterType] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [selectedRelacion, setSelectedRelacion] = useState(null);
+  const [flagUrls, setFlagUrls] = useState({});
 
   useEffect(() => {
+ 
     Papa.parse("/relaciones_internacionales.csv", {
       download: true,
       header: true,
@@ -18,12 +21,37 @@ const Internacionalizacion = () => {
       complete: (results) => {
         setRelaciones(results.data);
         setFilteredRelaciones(results.data);
+       
+        fetchFlags(results.data);
       },
       error: (error) => {
         console.error("Error al cargar los datos:", error);
       },
     });
   }, []);
+
+  const fetchFlags = (relaciones) => {
+   
+    const countries = relaciones.map((r) => r.country);
+    const uniqueCountries = [...new Set(countries)];
+
+    const fetchFlagsData = async () => {
+      const flags = {};
+      for (let country of uniqueCountries) {
+        try {
+          const response = await axios.get(
+            `https://flagcdn.com/w320/${country.toLowerCase()}.png`
+          );
+          flags[country] = response.request.responseURL; 
+        } catch (error) {
+          console.error(`Error al obtener bandera de ${country}:`, error);
+        }
+      }
+      setFlagUrls(flags);
+    };
+
+    fetchFlagsData();
+  };
 
   const handleFilterChange = (e, filterTypeField) => {
     const value = e.target.value;
@@ -160,7 +188,17 @@ const Internacionalizacion = () => {
               {filteredRelaciones.map((relacion, index) => (
                 <tr key={index} className="proyecto-row">
                   <td>{relacion.name}</td>
-                  <td>{relacion.country}</td>
+                  <td>
+                    {flagUrls[relacion.country] ? (
+                      <img
+                        src={flagUrls[relacion.country]}
+                        alt={relacion.country}
+                        className="country-flag"
+                      />
+                    ) : (
+                      relacion.country
+                    )}
+                  </td>
                   <td>{relacion.institution}</td>
                   <td>{typeLabel(relacion.type)}</td>
                   <td className="year-cell">{relacion.startDate}</td>

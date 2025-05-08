@@ -1,4 +1,4 @@
-/* ImpactoSocial.css (basado en Egresados.css) */
+
 .impacto-container {
     width: 100%;
     max-width: 1200px;
@@ -217,12 +217,12 @@
     margin: 20px 0;
 }
 
-/* Estilos para el mensaje flotante de alerta */
+
 .alert-container {
   position: fixed;
   top: 20px;
   right: 20px;
-  background-color: #f44336; /* Rojo para la alerta */
+  background-color: #f44336; 
   color: white;
   padding: 15px;
   border-radius: 8px;
@@ -263,11 +263,11 @@
 }
 
 .alert-container.success {
-  background-color: #4caf50; /* Verde para el mensaje de éxito */
+  background-color: #4caf50; 
 }
 
 .alert-container.error {
-  background-color: #f44336; /* Rojo para el mensaje de error */
+  background-color: #f44336; 
 }
 
 /* Responsive */
@@ -303,7 +303,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* fondo oscuro semi-transparente */
+    background: rgba(0, 0, 0, 0.6); 
     display: flex;
     justify-content: center;
     align-items: center;
