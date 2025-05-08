@@ -1,23 +1,25 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import logoUniCesar from "./assets/LOGO-UNICESAR.png";
-
-// Añade estas importaciones al inicio del archivo junto a las existentes
 import facebookIcon from "./assets/facebook.png";
 import twitterIcon from "./assets/x.png";
 import instagramIcon from "./assets/instagram.png";
+import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
-// Importar tu componente Dashboard existente
 import Dashboard from "./Componentes/Dashboard/Dashboard";
-import Empresas from './Comp_Carlos/Empresas';
+import GaleriaMultimedia from "./Componentes/Eventos/GaleriaMultimedia";
+import Empresas from "./Comp_Carlos/Empresas";
+import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
+import Beneficios from "./Comp_Carlos/Beneficios";
 
+import ProyectosEmpresa from "./Comp_Carlos/ProyectosEmpresa";
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
+  const [showSubmenu, setShowSubmenu] = useState(false);
 
   return (
     <div className="landing-container">
-      {/* Header with Navigation */}
+      {/* HEADER */}
       <header className="main-header">
         <div className="top-bar">
           <div className="logo-container">
@@ -26,9 +28,10 @@ function App() {
               alt="Logo Universidad Popular del Cesar"
               className="logo-img"
             />
-            {/* <h1>Ingeniería de Sistemas</h1> */}
           </div>
         </div>
+
+        {/* NAVEGACIÓN */}
         <nav className="nav-menu">
           <ul>
             <li
@@ -49,18 +52,53 @@ function App() {
             >
               Egresados
             </li>
+
+            {/* EMPRESAS CON SUBMENÚ */}
             <li
-              onClick={() => setActiveSection("companies")}
-              className={activeSection === "companies" ? "active" : ""}
+              className="dropdown"
+              onMouseEnter={() => setShowSubmenu(true)}
+              onMouseLeave={() => setShowSubmenu(false)}
             >
-              Empresas
+              <span className="nav-item">Empresas</span>
+              {showSubmenu && (
+                <ul className="submenu">
+                  <li
+                    onClick={() => {
+                      setActiveSection("empresas_aliadas");
+                      setShowSubmenu(false);
+                    }}
+                  >
+                    Empresas aliadas
+                  </li>
+                  <li
+                    onClick={() => {
+                      setActiveSection("beneficios");
+                      setShowSubmenu(false);
+                    }}
+                  >
+                    Beneficios
+                  </li>
+
+                  <li
+                    onClick={() => {
+                      setActiveSection("convenios");
+                      setShowSubmenu(false);
+                    }}
+                  >
+                    Convenios activos
+                  </li>
+                  <li
+                    onClick={() => {
+                      setActiveSection("proyectos_empresa");
+                      setShowSubmenu(false);
+                    }}
+                  >
+                    Proyectos U–E
+                  </li>
+                </ul>
+              )}
             </li>
-            <li
-              onClick={() => setActiveSection("projects")}
-              className={activeSection === "projects" ? "active" : ""}
-            >
-              Proyectos
-            </li>
+
             <li
               onClick={() => setActiveSection("events")}
               className={activeSection === "events" ? "active" : ""}
@@ -68,32 +106,26 @@ function App() {
               Eventos
             </li>
             <li
+              onClick={() => setActiveSection("social_impact")}
+              className={activeSection === "social_impact" ? "active" : ""}
+            >
+              Impacto Social
+            </li>
+            <li
               onClick={() => setActiveSection("international")}
               className={activeSection === "international" ? "active" : ""}
             >
               Internacionalización
             </li>
-            <li
-              onClick={() => setActiveSection("social")}
-              className={activeSection === "social" ? "active" : ""}
-            >
-              Proyecto Social
-            </li>
-            <li
-              onClick={() => setActiveSection("publications")}
-              className={activeSection === "publications" ? "active" : ""}
-            >
-              Publicaciones
-            </li>
           </ul>
         </nav>
       </header>
 
-      {/* Contenido principal que cambia según la sección activa */}
+      {/* CONTENIDO DINÁMICO */}
       {activeSection === "inicio" && (
         <>
-          {/* Hero Section */}
           <section className="hero-section">
+            {/* ...tu código...*/}
             <div className="hero-content">
               <h2>Programa de Ingeniería de Sistemas</h2>
               <p>
@@ -105,12 +137,21 @@ function App() {
                 problemas, con capacidad de gestión, emprendimiento y
                 pensamiento crítico.
               </p>
-              <button className="cta-button">Conoce más</button>
+              <button
+                className="cta-button"
+                onClick={() =>
+                  window.open(
+                    "https://www.unicesar.edu.co/facultades_pregrado/pregrados-ingenierias/ing-sistemas/",
+                    "_blank"
+                  )
+                }
+              >
+                Conoce más
+              </button>
             </div>
           </section>
-
-          {/* Info Cards Section */}
           <section className="info-section">
+            {/* ...tus cards...*/}
             <div className="info-card mission">
               <h3>Misión</h3>
               <p>
@@ -147,13 +188,17 @@ function App() {
           </section>
         </>
       )}
-
-      {/* Mostrar tu Dashboard existente cuando activeSection es "dashboard" */}
       {activeSection === "dashboard" && <Dashboard />}
-      {activeSection === "companies" && <Empresas cambiarSeccion={setActiveSection} />}
+      {activeSection === "empresas_aliadas" && (
+        <Empresas cambiarSeccion={setActiveSection} />
+      )}
+      {activeSection === "convenios" && <ConveniosActivos />}
+      {activeSection === "beneficios" && <Beneficios />}
+      {activeSection === "events" && <GaleriaMultimedia />}
 
+      {activeSection === "proyectos_empresa" && <ProyectosEmpresa />}
 
-      {/* Footer */}
+      {/* FOOTER */}
       <footer className="main-footer">
         <div className="footer-content">
           <div className="footer-section">
