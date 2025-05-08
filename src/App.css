@@ -6,6 +6,31 @@
 }
 
 
+/* Asegura que la cabecera esté encima del hero */
+.main-header {
+  position: relative;
+  z-index: 300;
+}
+
+/* También puedes hacerlo sobre el nav directamente */
+.nav-menu {
+  position: relative;
+  z-index: 300;
+}
+
+/* El sub-menú ya tenía un z-index, pero asegurémoslo */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 400;    /* más alto que el header */
+  display: block !important;
+}
 
 
 .logo {
@@ -590,7 +615,7 @@ header {
   border-radius: 6px;
   min-width: 180px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  z-index: 999;
+  z-index: 200;
 }
 
 .submenu li {
