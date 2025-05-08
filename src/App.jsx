@@ -146,6 +146,26 @@ function App() {
             </div>
 
         </section>
+        <section className="achievements-section">
+          <h2>NUESTROS LOGROS</h2>
+          <p className="achievement-subtitle">
+            Tenemos razones más que suficientes para estar orgullosos de nuestro Programa
+          </p>
+          <div className="achievement-stats">
+            <div className="stat-item">
+              <h3>820+</h3>
+              <p>Egresados</p>
+            </div>
+            <div className="stat-item">
+              <h3>714+</h3>
+              <p>Estudiantes</p>
+            </div>
+            <div className="stat-item">
+              <h3>32+</h3>
+              <p>Docentes</p>
+            </div>
+          </div>
+        </section>
         </>
       )}
       {activeSection === "dashboard"        && <Dashboard />}
