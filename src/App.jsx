@@ -9,6 +9,7 @@ import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
 
 import Dashboard        from "./Componentes/Dashboard/Dashboard";
+import GaleriaMultimedia from './Componentes/Eventos/GaleriaMultimedia';
 import Empresas         from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
 import Beneficios       from "./Comp_Carlos/Beneficios";
@@ -147,6 +148,7 @@ function App() {
       {activeSection === "empresas_aliadas" && <Empresas cambiarSeccion={setActiveSection} />}
       {activeSection === "convenios"        && <ConveniosActivos />}
       {activeSection === "beneficios"       && <Beneficios />}
+      {activeSection === 'events'           && <GaleriaMultimedia />}
      
       {activeSection === 'proyectos_empresa' && <ProyectosEmpresa />}
 
