@@ -11,6 +11,7 @@ import GaleriaMultimedia from "./Componentes/Eventos/GaleriaMultimedia";
 import Empresas from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
 import Beneficios from "./Comp_Carlos/Beneficios";
+import ImpactoSocial from "./Componentes/ImpactoSocial/Impacto";
 
 import ProyectosEmpresa from "./Comp_Carlos/ProyectosEmpresa";
 
@@ -107,8 +108,8 @@ function App() {
               Eventos
             </li>
             <li
-              onClick={() => setActiveSection("social_impact")}
-              className={activeSection === "social_impact" ? "active" : ""}
+              onClick={() => setActiveSection("Impacto")}
+              className={activeSection === "Impacto" ? "active" : ""}
             >
               Impacto Social
             </li>
@@ -198,6 +199,8 @@ function App() {
       {activeSection === "convenios" && <ConveniosActivos />}
       {activeSection === "beneficios" && <Beneficios />}
       {activeSection === "events" && <GaleriaMultimedia />}
+      {activeSection === "Impacto" && <ImpactoSocial />}
+
 
       {activeSection === "proyectos_empresa" && <ProyectosEmpresa />}
 
