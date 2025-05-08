@@ -86,6 +86,12 @@ function App() {
               Eventos
             </li>
             <li
+              onClick={() => setActiveSection("social_impact")}
+              className={activeSection === "social_impact" ? "active" : ""}
+            >
+              Impacto Social
+            </li>
+            <li
               onClick={() => setActiveSection("international")}
               className={activeSection === "international" ? "active" : ""}
             >
