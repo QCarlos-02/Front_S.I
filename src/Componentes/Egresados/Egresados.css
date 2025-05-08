@@ -86,8 +86,7 @@ h3 {
   font-size: 1.3rem;
 }
 
-/* Estilos para el filtro */
-.filter-section {
+.egresados-filter-section {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -95,26 +94,26 @@ h3 {
   border: 1px solid #eee;
 }
 
-.filters-container {
+.egresados-filters-container {
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
   margin-top: 15px;
 }
 
-.filter-group {
+.egresados-filter-group {
   flex: 1;
   min-width: 200px;
 }
 
-.filter-group label {
+.egresados-filter-group label {
   display: block;
   margin-bottom: 8px;
   font-weight: 500;
   color: #555;
 }
 
-.filter-group select {
+.egresados-filter-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
@@ -123,7 +122,7 @@ h3 {
   font-size: 14px;
 }
 
-.reset-button {
+.egresados-reset-button {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -136,7 +135,7 @@ h3 {
   transition: background-color 0.3s;
 }
 
-.reset-button:hover {
+.egresados-reset-button:hover {
   background-color: #3d8b40;
 }
 

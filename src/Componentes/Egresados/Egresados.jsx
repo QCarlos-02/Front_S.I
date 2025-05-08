@@ -356,11 +356,11 @@ const Egresados = () => {
                 con la comunidad de Ingeniería de Sistemas.
               </p>
 
-              <div className="filter-section">
+              <div className="egresados-filter-section">
                 <h3>Filtrar Egresados</h3>
-                <div className="filters-container">
-                  <div className="filter-group">
-                    <label htmlFor="graduationYear">Año de Graduación</label>
+                <div className="egresados-filters-container">
+                  <div className="egresados-filter-group">
+                    <label htmlFor="graduationYear">Año:</label>
                     <select
                       name="graduationYear"
                       id="graduationYear"
@@ -376,8 +376,8 @@ const Egresados = () => {
                     </select>
                   </div>
 
-                  <div className="filter-group">
-                    <label htmlFor="status">Estado</label>
+                  <div className="egresados-filter-group">
+                    <label htmlFor="status">Estado:</label>
                     <select
                       name="status"
                       id="status"
@@ -399,8 +399,8 @@ const Egresados = () => {
                     </select>
                   </div>
 
-                  <div className="filter-group">
-                    <label htmlFor="city">Ciudad</label>
+                  <div className="egresados-filter-group">
+                    <label htmlFor="city">Ciudad:</label>
                     <select
                       name="city"
                       id="city"
@@ -416,8 +416,8 @@ const Egresados = () => {
                     </select>
                   </div>
 
-                  <div className="filter-group">
-                    <label htmlFor="academicDegree">Formación Académica</label>
+                  <div className="egresados-filter-group">
+                    <label htmlFor="academicDegree">Formación:</label>
                     <select
                       name="academicDegree"
                       id="academicDegree"
@@ -431,7 +431,10 @@ const Egresados = () => {
                     </select>
                   </div>
 
-                  <button className="reset-button" onClick={resetFilters}>
+                  <button
+                    className="egresados-reset-button"
+                    onClick={resetFilters}
+                  >
                     Resetear Filtros
                   </button>
                 </div>
