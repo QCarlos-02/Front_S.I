@@ -1,25 +1,23 @@
-
 import React, { useState } from "react";
 import "./App.css";
 import facebookIcon from "./assets/facebook.png";
-import twitterIcon  from "./assets/x.png";
+import twitterIcon from "./assets/x.png";
 import instagramIcon from "./assets/instagram.png";
 import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
-
-
-import Dashboard        from "./Componentes/Dashboard/Dashboard";
-import GaleriaMultimedia from './Componentes/Eventos/GaleriaMultimedia';
-import Empresas         from "./Comp_Carlos/Empresas";
+import Dashboard from "./Componentes/Dashboard/Dashboard";
+import Egresados from "./Componentes/Egresados/Egresados";
+import GaleriaMultimedia from "./Componentes/Eventos/GaleriaMultimedia";
+import Empresas from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
-import Beneficios       from "./Comp_Carlos/Beneficios";
-
-import ProyectosEmpresa from './Comp_Carlos/ProyectosEmpresa';
-
+import Beneficios from "./Comp_Carlos/Beneficios";
+import ImpactoSocial from "./Componentes/ImpactoSocial/Impacto";
+import ProyectosEmpresa from "./Comp_Carlos/ProyectosEmpresa";
+import Internacionalizacion from "./Componentes/Internacionalizacion/internacionalizacion";
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
-  const [showSubmenu,    setShowSubmenu]    = useState(false);
+  const [showSubmenu, setShowSubmenu] = useState(false);
 
   return (
     <div className="landing-container">
@@ -65,19 +63,39 @@ function App() {
               <span className="nav-item">Empresas</span>
               {showSubmenu && (
                 <ul className="submenu">
-                  <li onClick={() => { setActiveSection("empresas_aliadas"); setShowSubmenu(false); }}>
+                  <li
+                    onClick={() => {
+                      setActiveSection("empresas_aliadas");
+                      setShowSubmenu(false);
+                    }}
+                  >
                     Empresas aliadas
                   </li>
-                  <li onClick={() => { setActiveSection("beneficios"); setShowSubmenu(false); }}>
+                  <li
+                    onClick={() => {
+                      setActiveSection("beneficios");
+                      setShowSubmenu(false);
+                    }}
+                  >
                     Beneficios
                   </li>
-                 
-                  <li onClick={() => { setActiveSection("convenios"); setShowSubmenu(false); }}>
+
+                  <li
+                    onClick={() => {
+                      setActiveSection("convenios");
+                      setShowSubmenu(false);
+                    }}
+                  >
                     Convenios activos
                   </li>
-                  <li onClick={() => { setActiveSection('proyectos_empresa'); setShowSubmenu(false); }}>
+                  <li
+                    onClick={() => {
+                      setActiveSection("proyectos_empresa");
+                      setShowSubmenu(false);
+                    }}
+                  >
                     Proyectos U–E
-                   </li>
+                  </li>
                 </ul>
               )}
             </li>
@@ -89,18 +107,17 @@ function App() {
               Eventos
             </li>
             <li
-              onClick={() => setActiveSection("social_impact")}
-              className={activeSection === "social_impact" ? "active" : ""}
+              onClick={() => setActiveSection("Impacto")}
+              className={activeSection === "Impacto" ? "active" : ""}
             >
               Impacto Social
             </li>
             <li
-              onClick={() => setActiveSection("international")}
-              className={activeSection === "international" ? "active" : ""}
+              onClick={() => setActiveSection("Internacionalizacion")}
+              className={activeSection === "Internacionalizacion" ? "active" : ""}
             >
               Internacionalización
             </li>
-           
           </ul>
         </nav>
       </header>
@@ -109,15 +126,27 @@ function App() {
       {/* CONTENIDO DINÁMICO */}
       {activeSection === "inicio" && (
         <>
-        <section className="hero-section">{/* ...tu código...*/}
-          <div className="hero-content">
+          <section className="hero-section">
+            {/* ...tu código...*/}
+            <div className="hero-content">
               <h2>Programa de Ingeniería de Sistemas</h2>
               <p>
-                El Ingeniero de Sistemas egresado de la Universidad Popular del Cesar será un profesional integral que estará en la capacidad de desarrollar soluciones de software aplicando las ciencias básicas y de ingeniería, modelos basados en métodos analíticos, computacionales y experimentales para la resolución de problemas, con capacidad de gestión, emprendimiento y pensamiento crítico.
+                El Ingeniero de Sistemas egresado de la Universidad Popular del
+                Cesar será un profesional integral que estará en la capacidad de
+                desarrollar soluciones de software aplicando las ciencias
+                básicas y de ingeniería, modelos basados en métodos analíticos,
+                computacionales y experimentales para la resolución de
+                problemas, con capacidad de gestión, emprendimiento y
+                pensamiento crítico.
               </p>
-              <button 
-                className="cta-button" 
-                onClick={() => window.open('https://www.unicesar.edu.co/facultades_pregrado/pregrados-ingenierias/ing-sistemas/', '_blank')}
+              <button
+                className="cta-button"
+                onClick={() =>
+                  window.open(
+                    "https://www.unicesar.edu.co/facultades_pregrado/pregrados-ingenierias/ing-sistemas/",
+                    "_blank"
+                  )
+                }
               >
                 Conoce más
               </button>
@@ -179,13 +208,20 @@ function App() {
         </section>
         </>
       )}
-      {activeSection === "dashboard"        && <Dashboard />}
-      {activeSection === "empresas_aliadas" && <Empresas cambiarSeccion={setActiveSection} />}
-      {activeSection === "convenios"        && <ConveniosActivos />}
-      {activeSection === "beneficios"       && <Beneficios />}
-      {activeSection === 'events'           && <GaleriaMultimedia />}
-     
-      {activeSection === 'proyectos_empresa' && <ProyectosEmpresa />}
+      {activeSection === "dashboard" && <Dashboard />}
+      {activeSection === "graduates" && <Egresados />}
+
+      {activeSection === "empresas_aliadas" && (
+        <Empresas cambiarSeccion={setActiveSection} />
+      )}
+      {activeSection === "convenios" && <ConveniosActivos />}
+      {activeSection === "beneficios" && <Beneficios />}
+      {activeSection === "events" && <GaleriaMultimedia />}
+      {activeSection === "Impacto" && <ImpactoSocial />}
+      {activeSection === "Internacionalizacion" && <Internacionalizacion />}
+
+
+      {activeSection === "proyectos_empresa" && <ProyectosEmpresa />}
 
       {/* FOOTER */}
       <footer className="main-footer">
@@ -199,28 +235,57 @@ function App() {
           </div>
           <div className="footer-section">
             <h4>Enlaces Rápidos</h4>
-            <a href="https://unicesar.edu.co/index.php/es/" target="_blank">Página Principal</a>
-            <a href="https://campus.unicesar.edu.co/" target="_blank">Campus Virtual</a>
-            <a href="https://biblioteca.unicesar.edu.co/" target="_blank">Biblioteca</a>
-            <a href="https://unicesar.edu.co/index.php/es/investigacion" target="_blank">Investigación</a>
+            <a href="https://unicesar.edu.co/index.php/es/" target="_blank">
+              Página Principal
+            </a>
+            <a href="https://campus.unicesar.edu.co/" target="_blank">
+              Campus Virtual
+            </a>
+            <a href="https://biblioteca.unicesar.edu.co/" target="_blank">
+              Biblioteca
+            </a>
+            <a
+              href="https://unicesar.edu.co/index.php/es/investigacion"
+              target="_blank"
+            >
+              Investigación
+            </a>
           </div>
           <div className="footer-section">
             <h4>Síguenos</h4>
             <div className="social-icons">
-              <a href="https://www.facebook.com/UPCesar" target="_blank" rel="noopener noreferrer">
-                <img src={facebookIcon} alt="Facebook" className="social-icon" />
+              <a
+                href="https://www.facebook.com/UPCesar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={facebookIcon}
+                  alt="Facebook"
+                  className="social-icon"
+                />
               </a>
               <a href="https://x.com" target="_blank" rel="noopener noreferrer">
                 <img src={twitterIcon} alt="Twitter" className="social-icon" />
               </a>
-              <a href="https://www.instagram.com/unicesar_" target="_blank" rel="noopener noreferrer">
-                <img src={instagramIcon} alt="Instagram" className="social-icon" />
+              <a
+                href="https://www.instagram.com/unicesar_"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={instagramIcon}
+                  alt="Instagram"
+                  className="social-icon"
+                />
               </a>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2024 Universidad Popular del Cesar. Todos los derechos reservados.</p>
+          <p>
+            © 2024 Universidad Popular del Cesar. Todos los derechos reservados.
+          </p>
         </div>
       </footer>
     </div>

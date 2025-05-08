@@ -1,0 +1,279 @@
+/* Beneficios.css */
+
+.beneficios-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Cabecera */
+.beneficios-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.beneficios-title {
+  color: #4caf50;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.beneficios-subtitle {
+  color: #555;
+  font-size: 16px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Grid de beneficios principales */
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.beneficio-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.beneficio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.icono {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8f5e9;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.icono svg {
+  width: 30px;
+  height: 30px;
+  color: #4caf50;
+}
+
+.beneficio-titulo {
+  color: #2e7d32;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.beneficio-lista {
+  list-style-type: none;
+  padding: 0;
+}
+
+.beneficio-lista li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.beneficio-lista li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #4caf50;
+  font-weight: bold;
+}
+
+/* Sección informativa con pasos */
+.info-seccion {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 50px;
+}
+
+.info-seccion h2 {
+  color: #4caf50;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.pasos-colaboracion {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.paso {
+  display: flex;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.paso-numero {
+  background-color: #4caf50;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.paso-contenido h3 {
+  color: #2e7d32;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.paso-contenido p {
+  margin: 0;
+  color: #555;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Testimonios */
+.testimonios-seccion {
+  margin-bottom: 50px;
+}
+
+.testimonios-seccion h2 {
+  color: #4caf50;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.testimonio-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.testimonio-contenido {
+  padding: 25px;
+  position: relative;
+}
+
+.testimonio-contenido::before {
+  content: '"';
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 60px;
+  color: #e8f5e9;
+  z-index: 0;
+  line-height: 1;
+}
+
+.testimonio-texto {
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+  color: #444;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.testimonio-autor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.autor-nombre {
+  color: #2e7d32;
+  font-weight: bold;
+  margin: 0;
+}
+
+.autor-cargo {
+  color: #777;
+  font-size: 13px;
+  margin: 0;
+}
+
+/* CTA Final */
+.cta-seccion {
+  text-align: center;
+  background-color: #e8f5e9;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.cta-seccion h2 {
+  color: #2e7d32;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.cta-seccion p {
+  color: #555;
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-boton {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.cta-boton:hover {
+  background-color: #2e7d32;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .beneficios-title {
+    font-size: 28px;
+  }
+
+  .beneficios-grid,
+  .testimonios-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pasos-colaboracion {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-seccion {
+    padding: 30px 20px;
+  }
+}
