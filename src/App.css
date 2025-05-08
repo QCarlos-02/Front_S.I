@@ -153,7 +153,7 @@ header {
   justify-content: center;
   text-align: center;
   color: white;
-  padding: 4rem 2rem;
+  padding: 14rem 2rem;
   margin-bottom: 4rem;
   position: relative;
   backdrop-filter: blur(2px);
@@ -210,25 +210,10 @@ header {
 .info-section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 3rem;
   padding: 4rem 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: #f8f9fa;
-  position: relative; /* Add position relative */
-}
-
-/* Add a subtle separator */
-.info-section::before {
-  content: '';
-  position: absolute;
-  top: -2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  height: 1px;
-  background-color: #90C074;
-  opacity: 0.5;
 }
 
 .info-card {
@@ -237,14 +222,54 @@ header {
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.8s cubic-bezier(.34,1.45,.7,1);
+  transform-style: preserve-3d;
+  height: 450px;  /* Increased fixed height */
+  position: relative;
+  cursor: pointer;
+}
+
+.info-card-front,
+.info-card-back {
+  position: absolute;
+  width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  padding: 2.5rem;
+  backface-visibility: hidden;
+  background: #FFFFFF;
+  border-radius: 12px;
+}
+
+.info-card-front {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-card-back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  padding: 3rem;
+}
+
+.info-card-back::-webkit-scrollbar {
+  width: 8px;
+}
+
+.info-card-back::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.info-card-back::-webkit-scrollbar-thumb {
+  background: #90C074;
+  border-radius: 4px;
 }
 
 .info-card:hover {
-  transform: translateY(-5px);
+  transform: rotateY(180deg);
   box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
@@ -313,7 +338,7 @@ header {
 
 .logo-img {
   /* height: 200px; */
-  width: 280px;
+  width: 180px;
   object-fit: contain;
 }
 
@@ -325,14 +350,14 @@ header {
 }
 
 .main-footer {
-  background-color: #1e3d59; /* Azul oscuro profesional */
+  background: linear-gradient(181deg, white, #FFFF, #e8f5e9, #a5d6a7, #66bb6a, #388e3c);
   color: #FFFFFF;
   padding: 4rem 2rem 2rem;
   margin-top: auto;
 }
 
 .footer-section h4 {
-  color: #ffc13b; /* Amarillo cálido para los títulos */
+  color: #959595 !important; /* Amarillo cálido para los títulos */
   font-size: 1.4rem;
   margin-bottom: 1.2rem;
   position: relative;
@@ -373,16 +398,19 @@ header {
 }
 
 .footer-section h4 {
+  color: #959595 !important;
   margin-bottom: 0.8rem; /* Reducido de 1.2rem */
   padding-bottom: 0.5rem; /* Reducido de 0.8rem */
 }
 
 .footer-section p {
+  color: #757575 !important;
   margin: 0.2rem 0; /* Reducido de 0.5rem */
   line-height: 1.4; /* Reducido de 1.6 */
 }
 
 .footer-section a {
+  color: #757575 !important;
   margin: 0.2rem 0; /* Reducido de 0.5rem */
 }
 
@@ -429,49 +457,19 @@ header {
 }
 
 .footer-section h4 {
-  color: #1e3d59;
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  position: relative;
-  padding-bottom: 0.5rem;
+  color: #000000; /* Same gray color as menu items */
+  margin-bottom: 15px;
 }
 
-.footer-section h4::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 50px;
-  height: 3px;
-  background-color: #1e3d59;
-}
-
-.social-icons a:hover {
-  background-color: #1e3d59;
-  transform: translateY(-3px);
-}
-
-.footer-section a:hover {
-  color: #1e3d59;
-}
-
+.footer-section a,
 .footer-section p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.footer-section a {
-  color: #FFFFFF;
+  color: #000000;
   text-decoration: none;
   transition: color 0.3s ease;
-  display: block;
-  margin: 0.5rem 0;
-  font-size: 1rem;
 }
 
 .footer-section a:hover {
-  color: #d4dad1;
+  color: #333333;
 }
 
 .social-icons {
@@ -538,8 +536,7 @@ header {
 }
 
 .nav-menu {
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0px 20px;
 }
 
 .nav-menu ul {
@@ -694,12 +691,18 @@ header {
 }
 
 .main-header {
-  position: relative;
+  width: 99% ;
+  padding: 0px 10px !important;
+  margin: 5px;
+  border-radius: 80px;
+  position: fixed;
   z-index: 100000; /* Very high z-index */
   background: white;
 }
 
 .nav-menu {
+  /* padding: 20px; */
+  border-radius: 70px;
   position: relative;
   z-index: 100000;
 }
@@ -726,4 +729,125 @@ header {
 .hero-section {
   position: relative;
   z-index: 1;
+}
+
+.achievements-section {
+  background-color: #fff;
+  padding: 40px 20px;
+  margin: 40px auto 80px; /* Increased bottom margin */
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+.achievements-title-section {
+  flex: 1;
+  text-align: left;
+  padding: 20px;
+}
+
+.achievements-title-section h2 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  color: #0B7F46; /* Matching your theme color */
+}
+
+.achievement-stats {
+  flex: 2;
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+  padding: 20px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  background: rgba(11, 127, 70, 0.05);
+}
+
+.stat-item h3 {
+  font-size: 2.5em;
+  color: #0B7F46;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.stat-item:hover h3 {
+  transform: scale(1.1);
+  color: #2E7D32;
+}
+
+.stat-item p {
+  color: #666;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover p {
+  color: #333;
+}
+
+/* Add shine effect */
+.stat-item::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.stat-item:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+.achievement-subtitle {
+  color: #333;
+  font-size: 1.2em;
+}
+
+.achievement-stats {
+  flex: 2;
+  display: flex;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h3 {
+  font-size: 2.5em;
+  color: #2c5282;
+  margin-bottom: 10px;
+}
+
+.stat-item p {
+  color: #666;
+  font-size: 1.1em;
 }

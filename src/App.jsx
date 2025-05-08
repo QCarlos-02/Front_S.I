@@ -23,7 +23,6 @@ function App() {
 
   return (
     <div className="landing-container">
-      {/* HEADER */}
       <header className="main-header">
         <div className="top-bar">
           <div className="logo-container">
@@ -105,6 +104,7 @@ function App() {
           </ul>
         </nav>
       </header>
+      {/* HEADER */}
 
       {/* CONTENIDO DINÁMICO */}
       {activeSection === "inicio" && (
@@ -123,19 +123,30 @@ function App() {
               </button>
           </div>
         </section>
-        <section className="info-section">{/* ...tus cards...*/}
+        <section className="info-section">
           <div className="info-card mission">
+            <div className="info-card-front">
               <h3>Misión</h3>
+            </div>
+            <div className="info-card-back">
               <p>Formar profesionales en Ingeniería de Sistemas con capacidad de gestionar, desarrollar y administrar proyectos de base tecnológica, comprometidos con el desarrollo sostenible de la región Caribe y el país, fundamentados en principios y valores que contribuyan a la construcción de una sociedad más justa y equitativa.</p>
             </div>
+          </div>
 
-            <div className="info-card vision">
+          <div className="info-card vision">
+            <div className="info-card-front">
               <h3>Visión</h3>
+            </div>
+            <div className="info-card-back">
               <p>El programa de Ingeniería de Sistemas de la Universidad Popular del Cesar será reconocido en el 2026 por su excelencia académica, la calidad de sus egresados, el impacto de sus investigaciones y su contribución al desarrollo tecnológico de la región Caribe.</p>
             </div>
+          </div>
 
-            <div className="info-card values">
+          <div className="info-card values">
+            <div className="info-card-front">
               <h3>Valores Institucionales</h3>
+            </div>
+            <div className="info-card-back">
               <ul>
                 <li>Excelencia Académica</li>
                 <li>Innovación</li>
@@ -144,7 +155,7 @@ function App() {
                 <li>Trabajo en Equipo</li>
               </ul>
             </div>
-
+          </div>
         </section>
         <section className="achievements-section">
           <h2>NUESTROS LOGROS</h2>
