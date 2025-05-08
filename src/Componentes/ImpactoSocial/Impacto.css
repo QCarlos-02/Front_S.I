@@ -125,6 +125,14 @@
     color: #333;
     vertical-align: middle;
 }
+
+.impacto-table td.fecha-cell {
+    white-space: nowrap;
+  }
+  .year-cell {
+    white-space: nowrap;
+  }
+    
   
 .proyecto-row {
     transition: all 0.2s ease;
