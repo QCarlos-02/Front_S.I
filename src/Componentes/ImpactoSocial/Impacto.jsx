@@ -60,10 +60,9 @@ const ImpactoSocial = () => {
       </div>
 
       <div className="filter-section">
-        <h3>Filtrar por Estado</h3>
         <div className="filters-container">
           <div className="filter-group">
-            <label htmlFor="status">Estado</label>
+            <label htmlFor="status">Filtro por Estado</label>
             <select
               name="status"
               id="status"

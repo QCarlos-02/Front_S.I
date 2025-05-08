@@ -25,17 +25,19 @@
   
 .filter-section {
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     border: 1px solid #eee;
+    max-width: 300px;
+    text-align: left;
 }
   
 .filters-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 15px;
+    gap: 1px;
+    margin-top: 5px;
 }
   
 .filter-group {
