@@ -1,23 +1,26 @@
-import { useState } from "react";
+
+import React, { useState } from "react";
 import "./App.css";
+import facebookIcon from "./assets/facebook.png";
+import twitterIcon  from "./assets/x.png";
+import instagramIcon from "./assets/instagram.png";
 import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
-// Añade estas importaciones al inicio del archivo junto a las existentes
-import facebookIcon from "./assets/facebook.png";
-import twitterIcon from "./assets/x.png";
-import instagramIcon from "./assets/instagram.png";
 
-// Importar tu componente Dashboard existente
-import Dashboard from "./Componentes/Dashboard/Dashboard";
-import Empresas from './Comp_Carlos/Empresas';
 
+import Dashboard        from "./Componentes/Dashboard/Dashboard";
+import Empresas         from "./Comp_Carlos/Empresas";
+import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
+import Beneficios       from "./Comp_Carlos/Beneficios";
+import Estadisticas     from "./Comp_Carlos/Estadisticas";
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
+  const [showSubmenu,    setShowSubmenu]    = useState(false);
 
   return (
     <div className="landing-container">
-      {/* Header with Navigation */}
+      {/* HEADER */}
       <header className="main-header">
         <div className="top-bar">
           <div className="logo-container">
@@ -26,9 +29,10 @@ function App() {
               alt="Logo Universidad Popular del Cesar"
               className="logo-img"
             />
-            {/* <h1>Ingeniería de Sistemas</h1> */}
           </div>
         </div>
+
+        {/* NAVEGACIÓN */}
         <nav className="nav-menu">
           <ul>
             <li
@@ -49,12 +53,32 @@ function App() {
             >
               Egresados
             </li>
+
+            {/* EMPRESAS CON SUBMENÚ */}
             <li
-              onClick={() => setActiveSection("companies")}
-              className={activeSection === "companies" ? "active" : ""}
+              className="dropdown"
+              onMouseEnter={() => setShowSubmenu(true)}
+              onMouseLeave={() => setShowSubmenu(false)}
             >
-              Empresas
+              <span className="nav-item">Empresas</span>
+              {showSubmenu && (
+                <ul className="submenu">
+                  <li onClick={() => { setActiveSection("empresas_aliadas"); setShowSubmenu(false); }}>
+                    Empresas aliadas
+                  </li>
+                  <li onClick={() => { setActiveSection("beneficios"); setShowSubmenu(false); }}>
+                    Beneficios
+                  </li>
+                  <li onClick={() => { setActiveSection("estadisticas"); setShowSubmenu(false); }}>
+                    Estadísticas
+                  </li>
+                  <li onClick={() => { setActiveSection("convenios"); setShowSubmenu(false); }}>
+                    Convenios activos
+                  </li>
+                </ul>
+              )}
             </li>
+
             <li
               onClick={() => setActiveSection("projects")}
               className={activeSection === "projects" ? "active" : ""}
@@ -73,65 +97,33 @@ function App() {
             >
               Internacionalización
             </li>
-            <li
-              onClick={() => setActiveSection("social")}
-              className={activeSection === "social" ? "active" : ""}
-            >
-              Proyecto Social
-            </li>
-            <li
-              onClick={() => setActiveSection("publications")}
-              className={activeSection === "publications" ? "active" : ""}
-            >
-              Publicaciones
-            </li>
+           
           </ul>
         </nav>
       </header>
 
-      {/* Contenido principal que cambia según la sección activa */}
+      {/* CONTENIDO DINÁMICO */}
       {activeSection === "inicio" && (
         <>
-          {/* Hero Section */}
-          <section className="hero-section">
-            <div className="hero-content">
+          <section className="hero-section">{/* ...tu código...*/}
+          <div className="hero-content">
               <h2>Programa de Ingeniería de Sistemas</h2>
               <p>
-                El Ingeniero de Sistemas egresado de la Universidad Popular del
-                Cesar será un profesional integral que estará en la capacidad de
-                desarrollar soluciones de software aplicando las ciencias
-                básicas y de ingeniería, modelos basados en métodos analíticos,
-                computacionales y experimentales para la resolución de
-                problemas, con capacidad de gestión, emprendimiento y
-                pensamiento crítico.
+                El Ingeniero de Sistemas egresado de la Universidad Popular del Cesar será un profesional integral que estará en la capacidad de desarrollar soluciones de software aplicando las ciencias básicas y de ingeniería, modelos basados en métodos analíticos, computacionales y experimentales para la resolución de problemas, con capacidad de gestión, emprendimiento y pensamiento crítico.
               </p>
               <button className="cta-button">Conoce más</button>
             </div>
-          </section>
 
-          {/* Info Cards Section */}
-          <section className="info-section">
-            <div className="info-card mission">
+          </section>
+          <section className="info-section">{/* ...tus cards...*/}
+          <div className="info-card mission">
               <h3>Misión</h3>
-              <p>
-                Formar profesionales en Ingeniería de Sistemas con capacidad de
-                gestionar, desarrollar y administrar proyectos de base
-                tecnológica, comprometidos con el desarrollo sostenible de la
-                región Caribe y el país, fundamentados en principios y valores
-                que contribuyan a la construcción de una sociedad más justa y
-                equitativa.
-              </p>
+              <p>Formar profesionales en Ingeniería de Sistemas con capacidad de gestionar, desarrollar y administrar proyectos de base tecnológica, comprometidos con el desarrollo sostenible de la región Caribe y el país, fundamentados en principios y valores que contribuyan a la construcción de una sociedad más justa y equitativa.</p>
             </div>
 
             <div className="info-card vision">
               <h3>Visión</h3>
-              <p>
-                El programa de Ingeniería de Sistemas de la Universidad Popular
-                del Cesar será reconocido en el 2026 por su excelencia
-                académica, la calidad de sus egresados, el impacto de sus
-                investigaciones y su contribución al desarrollo tecnológico de
-                la región Caribe.
-              </p>
+              <p>El programa de Ingeniería de Sistemas de la Universidad Popular del Cesar será reconocido en el 2026 por su excelencia académica, la calidad de sus egresados, el impacto de sus investigaciones y su contribución al desarrollo tecnológico de la región Caribe.</p>
             </div>
 
             <div className="info-card values">
@@ -144,16 +136,17 @@ function App() {
                 <li>Trabajo en Equipo</li>
               </ul>
             </div>
+
           </section>
         </>
       )}
+      {activeSection === "dashboard"        && <Dashboard />}
+      {activeSection === "empresas_aliadas" && <Empresas cambiarSeccion={setActiveSection} />}
+      {activeSection === "convenios"        && <ConveniosActivos />}
+      {activeSection === "beneficios"       && <Beneficios />}
+      {activeSection === "estadisticas"     && <Estadisticas />}
 
-      {/* Mostrar tu Dashboard existente cuando activeSection es "dashboard" */}
-      {activeSection === "dashboard" && <Dashboard />}
-      {activeSection === "companies" && <Empresas cambiarSeccion={setActiveSection} />}
-
-
-      {/* Footer */}
+      {/* FOOTER */}
       <footer className="main-footer">
         <div className="footer-content">
           <div className="footer-section">
@@ -165,57 +158,28 @@ function App() {
           </div>
           <div className="footer-section">
             <h4>Enlaces Rápidos</h4>
-            <a href="https://unicesar.edu.co/index.php/es/" target="_blank">
-              Página Principal
-            </a>
-            <a href="https://campus.unicesar.edu.co/" target="_blank">
-              Campus Virtual
-            </a>
-            <a href="https://biblioteca.unicesar.edu.co/" target="_blank">
-              Biblioteca
-            </a>
-            <a
-              href="https://unicesar.edu.co/index.php/es/investigacion"
-              target="_blank"
-            >
-              Investigación
-            </a>
+            <a href="https://unicesar.edu.co/index.php/es/" target="_blank">Página Principal</a>
+            <a href="https://campus.unicesar.edu.co/" target="_blank">Campus Virtual</a>
+            <a href="https://biblioteca.unicesar.edu.co/" target="_blank">Biblioteca</a>
+            <a href="https://unicesar.edu.co/index.php/es/investigacion" target="_blank">Investigación</a>
           </div>
           <div className="footer-section">
             <h4>Síguenos</h4>
             <div className="social-icons">
-              <a
-                href="https://www.facebook.com/UPCesar"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={facebookIcon}
-                  alt="Facebook"
-                  className="social-icon"
-                />
+              <a href="https://www.facebook.com/UPCesar" target="_blank" rel="noopener noreferrer">
+                <img src={facebookIcon} alt="Facebook" className="social-icon" />
               </a>
               <a href="https://x.com" target="_blank" rel="noopener noreferrer">
                 <img src={twitterIcon} alt="Twitter" className="social-icon" />
               </a>
-              <a
-                href="https://www.instagram.com/unicesar_"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={instagramIcon}
-                  alt="Instagram"
-                  className="social-icon"
-                />
+              <a href="https://www.instagram.com/unicesar_" target="_blank" rel="noopener noreferrer">
+                <img src={instagramIcon} alt="Instagram" className="social-icon" />
               </a>
             </div>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>
-            © 2024 Universidad Popular del Cesar. Todos los derechos reservados.
-          </p>
+          <p>© 2024 Universidad Popular del Cesar. Todos los derechos reservados.</p>
         </div>
       </footer>
     </div>

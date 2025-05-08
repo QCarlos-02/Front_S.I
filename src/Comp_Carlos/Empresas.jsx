@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import DataTable from 'react-data-table-component';
-import '../App.css'; // Asegúrate de tener este archivo CSS para los estilos
+import './Empresas.css'; // Asegúrate de tener este archivo CSS para los estilos
 const Empresas = () => {
   const [empresas, setEmpresas] = useState([]);
   const [filtro, setFiltro] = useState('');
