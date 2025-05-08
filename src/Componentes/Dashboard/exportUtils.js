@@ -1,34 +1,32 @@
-// utils/exportUtils.js
 import * as XLSX from "xlsx";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
 // Función para exportar a CSV
 export const downloadCSV = (data, filename) => {
-  // Preparamos los datos para el formato CSV
   let csvContent = "data:text/csv;charset=utf-8,";
 
-  // Agregar estadísticas generales
   csvContent += "Estadísticas Generales\n";
-  Object.entries(data.stats).forEach(([key, value]) => {
+  // Corregido para usar statsData en lugar de stats
+  Object.entries(data.statsData || {}).forEach(([key, value]) => {
     csvContent += `${key},${value}\n`;
   });
 
   csvContent += "\nDatos de Docentes\n";
   csvContent += "Categoría,Valor\n";
-  data.professorData.forEach((item) => {
+  (data.professorData || []).forEach((item) => {
     csvContent += `${item.name},${item.value}\n`;
   });
 
   csvContent += "\nProducción Académica\n";
   csvContent += "Categoría,Valor\n";
-  data.productionData.forEach((item) => {
+  (data.productionData || []).forEach((item) => {
     csvContent += `${item.name},${item.value}\n`;
   });
 
   csvContent += "\nEgresados por Año\n";
   csvContent += "Año,Cantidad\n";
-  data.graduatesPerYearData.forEach((item) => {
+  (data.graduatesPerYearData || []).forEach((item) => {
     csvContent += `${item.year},${item.value}\n`;
   });
 
@@ -44,11 +42,10 @@ export const downloadCSV = (data, filename) => {
 
 // Función para exportar a Excel
 export const downloadExcel = (data, filename) => {
-  // Crear un libro nuevo
   const workbook = XLSX.utils.book_new();
 
   // Datos para la hoja de estadísticas generales
-  const statsData = Object.entries(data.stats).map(([key, value]) => [
+  const statsData = Object.entries(data.statsData || {}).map(([key, value]) => [
     key,
     value,
   ]);
@@ -59,7 +56,7 @@ export const downloadExcel = (data, filename) => {
 
   // Datos para la hoja de docentes
   const professorHeaders = ["Categoría", "Valor"];
-  const professorRows = data.professorData.map((item) => [
+  const professorRows = (data.professorData || []).map((item) => [
     item.name,
     item.value,
   ]);
@@ -70,7 +67,7 @@ export const downloadExcel = (data, filename) => {
 
   // Datos para la hoja de producción académica
   const productionHeaders = ["Categoría", "Valor"];
-  const productionRows = data.productionData.map((item) => [
+  const productionRows = (data.productionData || []).map((item) => [
     item.name,
     item.value,
   ]);
@@ -81,7 +78,7 @@ export const downloadExcel = (data, filename) => {
 
   // Datos para la hoja de egresados por año
   const graduatesHeaders = ["Año", "Cantidad"];
-  const graduatesRows = data.graduatesPerYearData.map((item) => [
+  const graduatesRows = (data.graduatesPerYearData || []).map((item) => [
     item.year,
     item.value,
   ]);
@@ -104,95 +101,206 @@ export const downloadExcel = (data, filename) => {
   XLSX.writeFile(workbook, `${filename}.xlsx`);
 };
 
-// Función para exportar a PDF
+// Nueva implementación de la función PDF
 export const downloadPDF = (data, filename) => {
-  const doc = new jsPDF();
+  try {
+    // Crear un nuevo documento PDF
+    const doc = new jsPDF();
 
-  // Título del documento
-  doc.setFontSize(16);
-  doc.text("Estadísticas del Programa de Ingeniería de Sistemas", 14, 20);
-  doc.setFontSize(12);
-  doc.text("Universidad Popular del Cesar", 14, 30);
+    // Título del documento
+    doc.setFontSize(16);
+    doc.text("Estadísticas del Programa de Ingeniería de Sistemas", 14, 20);
+    doc.setFontSize(12);
+    doc.text("Universidad Popular del Cesar", 14, 30);
 
-  // Estadísticas generales
-  doc.setFontSize(14);
-  doc.text("Estadísticas Generales", 14, 45);
-  const statsData = Object.entries(data.stats).map(([key, value]) => {
-    let label = key.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
-    return [label, value];
-  });
+    // Variables para posicionamiento
+    let yPos = 40;
 
-  doc.autoTable({
-    startY: 50,
-    head: [["Indicador", "Valor"]],
-    body: statsData,
-    theme: "striped",
-    headStyles: { fillColor: [41, 128, 185] },
-  });
+    // ===== PÁGINA 1: ESTADÍSTICAS GENERALES =====
+    doc.setFontSize(14);
+    doc.text("Estadísticas Generales", 14, yPos);
+    yPos += 10;
 
-  // Datos de docentes
-  let currentY = doc.lastAutoTable.finalY + 15;
-  doc.setFontSize(14);
-  doc.text("Nivel Académico de Docentes", 14, currentY);
+    // Dibujar tabla simple sin usar autoTable
+    doc.setFontSize(11);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(41, 128, 185);
+    doc.rect(14, yPos, 80, 8, "F");
+    doc.rect(94, yPos, 30, 8, "F");
+    doc.text("Indicador", 16, yPos + 5.5);
+    doc.text("Valor", 96, yPos + 5.5);
+    yPos += 8;
 
-  const professorRows = data.professorData.map((item) => [
-    item.name,
-    item.value,
-  ]);
-  doc.autoTable({
-    startY: currentY + 5,
-    head: [["Categoría", "Cantidad"]],
-    body: professorRows,
-    theme: "striped",
-    headStyles: { fillColor: [41, 128, 185] },
-  });
+    // Filas de datos
+    doc.setTextColor(0, 0, 0);
+    let rowCount = 0;
 
-  // Nueva página para la producción académica
-  doc.addPage();
+    // Convertir labels a más legibles
+    Object.entries(data.statsData || {}).forEach(([key, value]) => {
+      let label = key
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
 
-  // Producción académica
-  doc.setFontSize(14);
-  doc.text("Producción Académica", 14, 20);
+      // Alternar colores de fondo para las filas
+      if (rowCount % 2 === 0) {
+        doc.setFillColor(240, 240, 240);
+      } else {
+        doc.setFillColor(255, 255, 255);
+      }
 
-  const productionRows = data.productionData.map((item) => [
-    item.name,
-    item.value,
-  ]);
-  doc.autoTable({
-    startY: 25,
-    head: [["Categoría", "Cantidad"]],
-    body: productionRows,
-    theme: "striped",
-    headStyles: { fillColor: [41, 128, 185] },
-  });
+      doc.rect(14, yPos, 80, 8, "F");
+      doc.rect(94, yPos, 30, 8, "F");
+      doc.text(label, 16, yPos + 5.5);
+      doc.text(value.toString(), 96, yPos + 5.5);
 
-  // Egresados por año
-  currentY = doc.lastAutoTable.finalY + 15;
-  doc.setFontSize(14);
-  doc.text("Egresados por Año", 14, currentY);
+      yPos += 8;
+      rowCount++;
 
-  const graduatesRows = data.graduatesPerYearData.map((item) => [
-    item.year,
-    item.value,
-  ]);
-  doc.autoTable({
-    startY: currentY + 5,
-    head: [["Año", "Cantidad"]],
-    body: graduatesRows,
-    theme: "striped",
-    headStyles: { fillColor: [41, 128, 185] },
-  });
+      // Si llegamos al final de la página, empezar una nueva
+      if (yPos > 270) {
+        doc.addPage();
+        yPos = 20;
+      }
+    });
 
-  // Agregar fecha de generación
-  const today = new Date();
-  const dateStr = today.toLocaleDateString();
-  doc.setFontSize(10);
-  doc.text(
-    `Documento generado el ${dateStr}`,
-    14,
-    doc.internal.pageSize.height - 10
-  );
+    // ===== PÁGINA 2: DOCENTES =====
+    doc.addPage();
+    yPos = 20;
 
-  // Guardar archivo
-  doc.save(`${filename}.pdf`);
+    doc.setFontSize(14);
+    doc.text("Nivel Académico de Docentes", 14, yPos);
+    yPos += 10;
+
+    // Dibujar encabezado para docentes
+    doc.setFontSize(11);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(41, 128, 185);
+    doc.rect(14, yPos, 80, 8, "F");
+    doc.rect(94, yPos, 30, 8, "F");
+    doc.text("Categoría", 16, yPos + 5.5);
+    doc.text("Cantidad", 96, yPos + 5.5);
+    yPos += 8;
+
+    // Filas de datos para docentes
+    doc.setTextColor(0, 0, 0);
+    rowCount = 0;
+
+    (data.professorData || []).forEach((item) => {
+      // Alternar colores de fondo
+      if (rowCount % 2 === 0) {
+        doc.setFillColor(240, 240, 240);
+      } else {
+        doc.setFillColor(255, 255, 255);
+      }
+
+      doc.rect(14, yPos, 80, 8, "F");
+      doc.rect(94, yPos, 30, 8, "F");
+      doc.text(item.name, 16, yPos + 5.5);
+      doc.text(item.value.toString(), 96, yPos + 5.5);
+
+      yPos += 8;
+      rowCount++;
+    });
+
+    // ===== PÁGINA 3: PRODUCCIÓN ACADÉMICA =====
+    doc.addPage();
+    yPos = 20;
+
+    doc.setFontSize(14);
+    doc.text("Producción Académica", 14, yPos);
+    yPos += 10;
+
+    // Dibujar encabezado para producción
+    doc.setFontSize(11);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(41, 128, 185);
+    doc.rect(14, yPos, 80, 8, "F");
+    doc.rect(94, yPos, 30, 8, "F");
+    doc.text("Categoría", 16, yPos + 5.5);
+    doc.text("Cantidad", 96, yPos + 5.5);
+    yPos += 8;
+
+    // Filas de datos para producción
+    doc.setTextColor(0, 0, 0);
+    rowCount = 0;
+
+    (data.productionData || []).forEach((item) => {
+      // Alternar colores de fondo
+      if (rowCount % 2 === 0) {
+        doc.setFillColor(240, 240, 240);
+      } else {
+        doc.setFillColor(255, 255, 255);
+      }
+
+      doc.rect(14, yPos, 80, 8, "F");
+      doc.rect(94, yPos, 30, 8, "F");
+      doc.text(item.name, 16, yPos + 5.5);
+      doc.text(item.value.toString(), 96, yPos + 5.5);
+
+      yPos += 8;
+      rowCount++;
+    });
+
+    // ===== PÁGINA 4: EGRESADOS POR AÑO =====
+    doc.addPage();
+    yPos = 20;
+
+    doc.setFontSize(14);
+    doc.text("Egresados por Año", 14, yPos);
+    yPos += 10;
+
+    // Dibujar encabezado para egresados
+    doc.setFontSize(11);
+    doc.setTextColor(255, 255, 255);
+    doc.setFillColor(41, 128, 185);
+    doc.rect(14, yPos, 30, 8, "F");
+    doc.rect(44, yPos, 30, 8, "F");
+    doc.text("Año", 16, yPos + 5.5);
+    doc.text("Cantidad", 46, yPos + 5.5);
+    yPos += 8;
+
+    // Filas de datos para egresados
+    doc.setTextColor(0, 0, 0);
+    rowCount = 0;
+
+    (data.graduatesPerYearData || []).forEach((item) => {
+      // Alternar colores de fondo
+      if (rowCount % 2 === 0) {
+        doc.setFillColor(240, 240, 240);
+      } else {
+        doc.setFillColor(255, 255, 255);
+      }
+
+      doc.rect(14, yPos, 30, 8, "F");
+      doc.rect(44, yPos, 30, 8, "F");
+      doc.text(item.year, 16, yPos + 5.5);
+      doc.text(item.value.toString(), 46, yPos + 5.5);
+
+      yPos += 8;
+      rowCount++;
+    });
+
+    // Agregar fecha de generación en todas las páginas
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      const today = new Date();
+      const dateStr = today.toLocaleDateString();
+      doc.setFontSize(10);
+      doc.text(
+        `Documento generado el ${dateStr} - Página ${i} de ${pageCount}`,
+        14,
+        doc.internal.pageSize.height - 10
+      );
+    }
+
+    // Guardar archivo
+    doc.save(`${filename}.pdf`);
+    console.log("PDF exportado correctamente");
+  } catch (error) {
+    console.error("Error al generar el PDF:", error);
+    alert(
+      `Ha ocurrido un error al generar el PDF. Revise la consola para más detalles: ${error.message}`
+    );
+  }
 };

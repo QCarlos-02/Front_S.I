@@ -188,6 +188,25 @@ const Egresados = () => {
     return nombreCompleto || "Nombre no disponible";
   };
 
+  // Componente para el icono de persona
+  const PersonIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="person-icon"
+    >
+      <circle cx="12" cy="7" r="4" />
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    </svg>
+  );
+
   // Datos para Historias Destacadas (normalmente vendrían de una API)
   const historiasDestacadas = [
     {
@@ -424,7 +443,7 @@ const Egresados = () => {
                   <table className="egresados-table">
                     <thead>
                       <tr>
-                        <th>Foto</th>
+                        <th>Perfil</th>
                         <th>Nombre</th>
                         <th>Graduación</th>
                         <th>Estado</th>
@@ -445,13 +464,7 @@ const Egresados = () => {
                           <tr key={index} className="egresado-row">
                             <td className="photo-cell">
                               <div className="photo-wrapper">
-                                <img
-                                  src={
-                                    egresado.photo || "/api/placeholder/60/60"
-                                  }
-                                  alt={`Foto de egresado`}
-                                  className="egresado-photo-small"
-                                />
+                                <PersonIcon />
                               </div>
                             </td>
                             <td className="name-cell">
