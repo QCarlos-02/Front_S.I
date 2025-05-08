@@ -12,8 +12,8 @@ import Empresas from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
 import Beneficios from "./Comp_Carlos/Beneficios";
 import ImpactoSocial from "./Componentes/ImpactoSocial/Impacto";
-
 import ProyectosEmpresa from "./Comp_Carlos/ProyectosEmpresa";
+import Internacionalizacion from "./Componentes/Internacionalizacion/internacionalizacion";
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
@@ -114,8 +114,8 @@ function App() {
               Impacto Social
             </li>
             <li
-              onClick={() => setActiveSection("international")}
-              className={activeSection === "international" ? "active" : ""}
+              onClick={() => setActiveSection("Internacionalizacion")}
+              className={activeSection === "Internacionalizacion" ? "active" : ""}
             >
               Internacionalización
             </li>
@@ -200,6 +200,7 @@ function App() {
       {activeSection === "beneficios" && <Beneficios />}
       {activeSection === "events" && <GaleriaMultimedia />}
       {activeSection === "Impacto" && <ImpactoSocial />}
+      {activeSection === "Internacionalizacion" && <Internacionalizacion />}
 
 
       {activeSection === "proyectos_empresa" && <ProyectosEmpresa />}
