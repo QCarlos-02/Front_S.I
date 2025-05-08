@@ -9,10 +9,13 @@ import logoUniCesar from "./assets/LOGO-UNICESAR.png";
 
 
 import Dashboard        from "./Componentes/Dashboard/Dashboard";
+import GaleriaMultimedia from './Componentes/Eventos/GaleriaMultimedia';
 import Empresas         from "./Comp_Carlos/Empresas";
 import ConveniosActivos from "./Comp_Carlos/ConveniosActivos";
 import Beneficios       from "./Comp_Carlos/Beneficios";
-import Estadisticas     from "./Comp_Carlos/Estadisticas";
+
+import ProyectosEmpresa from './Comp_Carlos/ProyectosEmpresa';
+
 
 function App() {
   const [activeSection, setActiveSection] = useState("inicio");
@@ -69,12 +72,13 @@ function App() {
                   <li onClick={() => { setActiveSection("beneficios"); setShowSubmenu(false); }}>
                     Beneficios
                   </li>
-                  <li onClick={() => { setActiveSection("estadisticas"); setShowSubmenu(false); }}>
-                    Estadísticas
-                  </li>
+                 
                   <li onClick={() => { setActiveSection("convenios"); setShowSubmenu(false); }}>
                     Convenios activos
                   </li>
+                  <li onClick={() => { setActiveSection('proyectos_empresa'); setShowSubmenu(false); }}>
+                    Proyectos U–E
+                   </li>
                 </ul>
               )}
             </li>
@@ -148,7 +152,9 @@ function App() {
       {activeSection === "empresas_aliadas" && <Empresas cambiarSeccion={setActiveSection} />}
       {activeSection === "convenios"        && <ConveniosActivos />}
       {activeSection === "beneficios"       && <Beneficios />}
-      {activeSection === "estadisticas"     && <Estadisticas />}
+      {activeSection === 'events'           && <GaleriaMultimedia />}
+     
+      {activeSection === 'proyectos_empresa' && <ProyectosEmpresa />}
 
       {/* FOOTER */}
       <footer className="main-footer">
