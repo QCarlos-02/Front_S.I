@@ -163,8 +163,8 @@ const Internacionalizacion = () => {
                   <td>{relacion.country}</td>
                   <td>{relacion.institution}</td>
                   <td>{typeLabel(relacion.type)}</td>
-                  <td>{relacion.startDate}</td>
-                  <td>{relacion.endDate}</td>
+                  <td className="year-cell">{relacion.startDate}</td>
+                  <td className="year-cell">{relacion.endDate}</td>
                   <td>
                     <span className={`status-badge ${statusClass(relacion.status)}`}>
                       {statusLabel(relacion.status)}
